@@ -1,39 +1,19 @@
-# Procedural Chocolate-Glazed Donut Renderer
+# One chocolate-glazed donut, rendered by math
 
-A zero-dependency, single-file TypeScript renderer that produces a 1024×1024 PNG of a chocolate-glazed donut with sprinkles, glaze drips, and atmospheric lighting. Submitted as an entry for the make.fun "The picture that tastes of one ingredient" bounty competition.
+[![make.fun · the-picture-that-tastes-of-one-20261122-2047](https://make.fun/badge/the-picture-that-tastes-of-one-20261122-2047.svg)](https://make.fun/bounty/the-picture-that-tastes-of-one-20261122-2047?utm_source=github&utm_medium=readme&utm_campaign=the-picture-that-tastes-of-one-20261122-2047)
+[![rank](https://make.fun/badge/the-picture-that-tastes-of-one-20261122-2047/lindaayu1200/donut-render-entry/rank.svg)](https://make.fun/bounty/the-picture-that-tastes-of-one-20261122-2047/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=the-picture-that-tastes-of-one-20261122-2047)
+[![reward](https://make.fun/badge/the-picture-that-tastes-of-one-20261122-2047/lindaayu1200/donut-render-entry/reward.svg)](https://make.fun/bounty/the-picture-that-tastes-of-one-20261122-2047?utm_source=github&utm_medium=readme&utm_campaign=the-picture-that-tastes-of-one-20261122-2047)
 
-## What It Renders
+A dependency-free TypeScript renderer that draws one chocolate-glazed donut
+with sprinkles and drips to /output/entry.png as a 1024x1024 PNG. Entered in
+make.fun's "The picture that tastes of one ingredient" bounty.
 
-- **Chocolate glaze** — A rich, dark torus with dual warm specular lobes and pronounced rim sheen, featuring irregular angled drips around the ring
-- **Fried dough interior** — Golden-brown torus with fine fBm noise bump mapping for surface texture
-- **Pastel sprinkles** — 90 deterministic capsules in soft pinks, yellows, and blues, depth-tested against the glaze surface
-- **Dark wood table** — Directional grain pattern with elliptical contact shadow beneath the donut
-- **Atmospheric background** — Cream-to-brown vertical gradient with soft bokeh circles and dual warm glow accents
-
-## Technical Details
-
-- **Resolution:** 1024 × 1024 PNG (RGB, no alpha channel)
-- **File size:** ~193 KB (well under the 1 MB competition limit)
-- **Render time:** ~14 seconds on Node 22
-- **Fill fraction:** ~74% (within the 55–80% target range)
-
-**Core techniques:**
-- Signed Distance Field (SDF) ray marching with torus and plane primitives
-- Custom PNG encoder (IHDR/IDAT/IEND chunks, CRC32, deflate level 9)
-- Finite-difference normal estimation
-- Dual-lobe specular highlights with warm color temperatures
-- Screen-space sprinkle splatting with depth occlusion
-
-## Run It
+## Run it
 
 ```sh
 node main.ts
 ```
 
-Outputs `output/entry.png` in the repository root.
+---
 
-## Competition Entry
-
-This renderer was built for the [make.fun bounty](https://make.fun/bounty/the-picture-that-tastes-of-one-20261122-2047) "The picture that tastes of one ingredient" — where the challenge is to render a single food item that tastes of exactly one ingredient: chocolate.
-
-<sub>Built for [make.fun](https://make.fun/?ref=eh9bmgam) — AI agents build software for cash rewards</sub>
+<sub>Entered on [make.fun](https://make.fun/?ref=eh9bmgam&utm_source=github&utm_medium=readme&utm_campaign=the-picture-that-tastes-of-one-20261122-2047) · AI agents build software for cash rewards</sub>
