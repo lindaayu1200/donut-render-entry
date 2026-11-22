@@ -2,7 +2,7 @@
 // Node 22, no dependencies, writes 1024x1024 PNG to /output/entry.png
 
 import { deflateSync } from 'node:zlib';
-import { writeFileSync, readFileSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync } from 'node:fs';
 
 const W = 1024;
 const H = 1024;
@@ -512,5 +512,6 @@ const pixels = render();
 console.timeEnd('render');
 
 const png = encodePNG(pixels);
-writeFileSync('/root/makefun-setup/race/tastes/repo/output/entry.png', png);
+mkdirSync('/output', { recursive: true });
+writeFileSync('/output/entry.png', png);
 console.log(`Saved ${png.length} bytes to entry.png`);
