@@ -164,7 +164,14 @@ function sdScene(p: Vec3): { d: number; mat: number } {
 // ===========================
 
 class Vec3 {
-  constructor(public x: number, public y: number, public z: number) {}
+  x: number;
+  y: number;
+  z: number;
+  constructor(x: number, y: number, z: number) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
   static zero() { return new Vec3(0, 0, 0); }
   add(o: Vec3) { return new Vec3(this.x + o.x, this.y + o.y, this.z + o.z); }
   sub(o: Vec3) { return new Vec3(this.x - o.x, this.y - o.y, this.z - o.z); }
@@ -178,7 +185,12 @@ class Vec3 {
 }
 
 class Vec2 {
-  constructor(public x: number, public y: number) {}
+  x: number;
+  y: number;
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
   add(o: Vec2) { return new Vec2(this.x + o.x, this.y + o.y); }
   sub(o: Vec2) { return new Vec2(this.x - o.x, this.y - o.y); }
   mul(s: number) { return new Vec2(this.x * s, this.y * s); }
@@ -237,18 +249,18 @@ function shade(pos: Vec3, normal: Vec3, mat: number, rd: Vec3): Vec3 {
   let col = new Vec3(0, 0, 0);
 
   if (mat === 1) { // Glaze: chocolate
-    const base = new Vec3(0.13, 0.065, 0.035);
+    const base = new Vec3(0.08, 0.035, 0.02); // richer, darker chocolate
     // Diffuse
-    col = col.add(base.mul(NdotL * 0.6));
-    // Specular lobe 1 (sharp, warm)
-    const spec1 = Math.pow(NdotH, 128) * 2.5;
-    col = col.add(new Vec3(1.0, 0.7, 0.4).mul(spec1));
-    // Specular lobe 2 (broader, warm rim)
-    const spec2 = Math.pow(NdotH, 16) * 0.8;
-    col = col.add(new Vec3(0.9, 0.5, 0.2).mul(spec2));
-    // Rim sheen (fresnel-like)
-    const rim = Math.pow(1 - clamp(N.dot(V), 0, 1), 3) * 0.6;
-    col = col.add(new Vec3(0.6, 0.3, 0.1).mul(rim));
+    col = col.add(base.mul(NdotL * 0.7));
+    // Specular lobe 1 (sharp, warm) - stronger
+    const spec1 = Math.pow(NdotH, 128) * 3.5;
+    col = col.add(new Vec3(1.0, 0.75, 0.45).mul(spec1));
+    // Specular lobe 2 (broader, warm rim) - stronger
+    const spec2 = Math.pow(NdotH, 16) * 1.2;
+    col = col.add(new Vec3(1.0, 0.6, 0.25).mul(spec2));
+    // Rim sheen (fresnel-like) - more pronounced
+    const rim = Math.pow(1 - clamp(N.dot(V), 0, 1), 3) * 0.9;
+    col = col.add(new Vec3(0.8, 0.4, 0.15).mul(rim));
     // Subtle glaze thickness variation
     const phi = Math.atan2(pos.z, pos.x);
     const thickness = 0.95 + 0.1 * noise2(phi * 5, pos.y * 10);
